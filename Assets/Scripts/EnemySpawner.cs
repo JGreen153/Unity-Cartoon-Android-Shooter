@@ -8,6 +8,9 @@ public class EnemySpawner : MonoBehaviour {
     private GameObject[] enemyPrefabs;
 
     [SerializeField]
+    private float startDelay;
+
+    [SerializeField]
     private float spawnDelay = 3;
 
     private int pooledAmount = 10;
@@ -25,7 +28,7 @@ public class EnemySpawner : MonoBehaviour {
             enemies.Add(enemy);
         }
 
-        InvokeRepeating("Spawn", 4.0f, spawnDelay);       
+        InvokeRepeating("Spawn", startDelay, spawnDelay);       
 	}
 
     void Spawn()
@@ -41,4 +44,10 @@ public class EnemySpawner : MonoBehaviour {
             }
         }
     }
+
+    void OnDisable()
+    {
+        CancelInvoke();
+    }
+
 }

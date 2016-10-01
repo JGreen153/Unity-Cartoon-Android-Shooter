@@ -38,4 +38,13 @@ public class PlayerMovement : MonoBehaviour {
         //The position is clamped between the boundary class values
         rb.position = new Vector2(Mathf.Clamp(rb.position.x, boundary.xMin, boundary.xMax), Mathf.Clamp(rb.position.y, boundary.yMin, boundary.yMax));
 	}
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.GetComponent<IPowerup>() != null)
+        {
+            other.GetComponent<IPowerup>().ApplyPowerup();
+            other.GetComponent<IPowerup>().DestroyPowerup();
+        }
+    }
 }
