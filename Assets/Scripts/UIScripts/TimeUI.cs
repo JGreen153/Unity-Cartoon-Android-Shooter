@@ -20,7 +20,7 @@ public class TimeUI : MonoBehaviour {
 	// Update is called once per frame
 	void UpdateText()
 	{
-        text.text = "" + TimeSurvived.time;
+        text.text = "Time: " + TimeSurvived.time;
 	}
 
     void OnDisable()

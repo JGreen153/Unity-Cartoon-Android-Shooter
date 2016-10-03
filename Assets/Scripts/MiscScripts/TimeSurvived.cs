@@ -25,6 +25,7 @@ public class TimeSurvived : MonoBehaviour {
     void OnEnable()
     {
         PlayerHealth.OnTimeStopped += StopTime;
+        FinishManager.OnGameFinished += StopTime;
     }
 
 	// Update is called once per frame
@@ -43,6 +44,7 @@ public class TimeSurvived : MonoBehaviour {
     void OnDisable()
     {
         PlayerHealth.OnTimeStopped -= StopTime;
+        FinishManager.OnGameFinished -= StopTime;
     }
 
     void StopTime()

@@ -13,7 +13,9 @@ public class HealthUI : MonoBehaviour {
 	{
         text = GetComponent<Text>();
 
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+
+        player = p.GetComponent<PlayerHealth>();
 
         text.text = "Health: " + player.GetHealth;
 	}
@@ -26,8 +28,7 @@ public class HealthUI : MonoBehaviour {
 
     void UpdateText()
     {
-        if (player.GetHealth < 100 && player.GetHealth > 0)
-            text.text = "Health: " + player.GetHealth;
+        text.text = "Health: " + player.GetHealth;
     }
 
     void OnDisable()

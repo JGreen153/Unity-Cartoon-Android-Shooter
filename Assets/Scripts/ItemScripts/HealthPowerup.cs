@@ -11,7 +11,10 @@ public class HealthPowerup : MonoBehaviour, IPowerup {
     // Use this for initialization
 	void Start() 
 	{
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        GameObject p = GameObject.FindGameObjectWithTag("Player");
+
+        if (p != null)
+            player = p.GetComponent<PlayerHealth>();
 	}
 
     void Update()

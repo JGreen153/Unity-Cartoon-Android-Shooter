@@ -10,6 +10,7 @@ public class PlayerHealth : Health {
     public static event TimeStopped OnTimeStopped;
 
     public int GetHealth { get { return health; } }
+    public bool PlayerIsDead { get { return isDead; } }
 
     void Update()
     {
@@ -17,8 +18,6 @@ public class PlayerHealth : Health {
         {
             Die();
         }
-
-        health = Mathf.Clamp(health, 0, 100);
 
         if (isDead)
         {
@@ -30,7 +29,10 @@ public class PlayerHealth : Health {
 
     public void Heal()
     {
-        health += 20;
+        if (GetHealth <= 80)
+            health += 20;
+        else
+            health = 100;
     }
    
     void OnCollisionEnter2D(Collision2D other)
