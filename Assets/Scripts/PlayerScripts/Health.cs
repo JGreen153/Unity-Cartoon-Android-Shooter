@@ -17,7 +17,9 @@ public abstract class Health : MonoBehaviour {
     void Awake()
     {
         isDead = false;
+
         initialHealth = health;
+
     }
 
     void Start()

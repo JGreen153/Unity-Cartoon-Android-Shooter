@@ -19,7 +19,24 @@ public class EnemyHealth : Health
         if (other.gameObject.GetComponent<BulletBehaviour>() != null)
         {
             Damage(other.gameObject.GetComponent<BulletBehaviour>().Damage);
-            PlayerScore.score += enemyScore;
+
+            if (PlayerScore.score + enemyScore < FinishManager.ScoreToWin)
+                PlayerScore.score += enemyScore;
+            else if (PlayerScore.score + enemyScore >= FinishManager.ScoreToWin)
+                PlayerScore.score = FinishManager.ScoreToWin;        
+
+            if (OnUpdateScore != null)
+                OnUpdateScore();
+        }
+
+        if(other.gameObject.GetComponent<RocketExplosion>() != null)
+        {
+            Damage(1);
+
+            if (PlayerScore.score + enemyScore / 2 < FinishManager.ScoreToWin)
+                PlayerScore.score += enemyScore / 2;
+            else if (PlayerScore.score + enemyScore / 2 >= FinishManager.ScoreToWin)
+                PlayerScore.score = FinishManager.ScoreToWin;
 
             if (OnUpdateScore != null)
                 OnUpdateScore();

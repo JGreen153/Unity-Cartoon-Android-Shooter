@@ -56,7 +56,7 @@ public class BulletBehaviour : MonoBehaviour
         explosion.transform.rotation = transform.rotation;
         explosion.SetActive(true);
 
-        Invoke("Disable", 0.4f);
+        Invoke("Disable", 0.35f);
     }
 
     void Disable()

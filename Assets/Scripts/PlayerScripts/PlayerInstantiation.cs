@@ -21,11 +21,6 @@ public class PlayerInstantiation : MonoBehaviour {
     {
         int characterNumber = CharacterSelection.characterSelected;
 
-        switch (next.buildIndex)
-        {
-            case 1:
-            case 2:
-            case 3:
                 for (int i = 0; i < characters.Length; i++)
                 {
                     if (characterNumber == i)
@@ -34,8 +29,6 @@ public class PlayerInstantiation : MonoBehaviour {
                         break;
                     }
                 }
-                break;
-        }
     }
 
 }

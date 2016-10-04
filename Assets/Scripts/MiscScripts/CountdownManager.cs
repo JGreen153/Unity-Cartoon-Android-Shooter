@@ -14,8 +14,12 @@ public class CountdownManager : MonoBehaviour {
 	void Start() 
 	{
         timeSurvived.enabled = false;
+
         countDownText = GetComponent<Text>();
-        countDown = 4.5f;
+
+        countDownText.text = "";
+
+        countDown = 8;
 	}
 
 	// Update is called once per frame
@@ -23,7 +27,7 @@ public class CountdownManager : MonoBehaviour {
 	{
         countDown -= Time.smoothDeltaTime;
 
-        if(countDown >= 3.5f)
+        if(countDown < 5.0f && countDown >= 3.5f)
         {
             countDownText.text = "3";
         }
@@ -39,11 +43,11 @@ public class CountdownManager : MonoBehaviour {
         {
             countDownText.text = "GO!";
         }
-        else
+        else if(countDown < 0.5f)
         {
             countDownText.text = "";
             timeSurvived.enabled = true;
-            enabled = false;
+            gameObject.SetActive(false);
         }
 	}
 }

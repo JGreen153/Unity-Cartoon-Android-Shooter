@@ -8,7 +8,11 @@ public class LevelSelect : MonoBehaviour {
     {
         SUNNY,
         MISTY,
-        SPACE
+        SPACE,
+        DESERT,
+        DAWN,
+        MOUNTAINS,
+        GHOSTS
     };
 
     private LEVEL level = LEVEL.SUNNY;
@@ -17,6 +21,12 @@ public class LevelSelect : MonoBehaviour {
 
     [SerializeField]
     private Button leftButton, rightButton;
+
+    [SerializeField]
+    private Text medalAmountText, lockedText;
+
+    [SerializeField]
+    private float medalsForDesert, medalsForDawn, medalsForMountains, medalsForGhosts;
 
     private int levelIndex;
 
@@ -30,6 +40,8 @@ public class LevelSelect : MonoBehaviour {
         levelLoader = FindObjectOfType<LevelLoad>();
         button = GetComponent<Button>();
 
+        lockedText.text = "";
+
         button.onClick.AddListener(() => levelLoader.LoadMethod(levelIndex));
     }
 
@@ -40,20 +52,100 @@ public class LevelSelect : MonoBehaviour {
         switch (level)
         {
             case LEVEL.MISTY:
+
                 levelIndex = 1;
 
                 selectedLevel.text = "Sunny";
                 selectedLevel.color = Color.yellow;
 
+                lockedText.text = "";
+
+                medalAmountText.text = "x0";
+
                 level = LEVEL.SUNNY;
+
                 break;
             case LEVEL.SPACE:
+
                 levelIndex = 2;
 
                 selectedLevel.text = "Misty";
                 selectedLevel.color = Color.grey;
 
+                lockedText.text = "";
+
+                medalAmountText.text = "x0";
+
                 level = LEVEL.MISTY;
+
+                break;
+            case LEVEL.DESERT:
+
+                levelIndex = 3;
+
+                selectedLevel.text = "Space";
+                selectedLevel.color = Color.magenta;
+
+                lockedText.text = "";
+
+                medalAmountText.text = "x0";
+
+                level = LEVEL.SPACE;
+
+                break;
+            case LEVEL.DAWN:
+
+                lockedText.text = "Locked";
+
+                if (TrophyCount.trophyCount >= medalsForDesert)
+                {
+                    levelIndex = 4;
+                    lockedText.text = "";
+                }
+
+                selectedLevel.text = "Desert";
+                selectedLevel.color = new Color(1.0f, 0.85f, 0.7f);
+
+                medalAmountText.text = "x1";
+
+                level = LEVEL.DESERT;
+
+                break;
+            case LEVEL.MOUNTAINS:
+
+                lockedText.text = "Locked";
+
+                if (TrophyCount.trophyCount >= medalsForDawn)
+                {
+                    levelIndex = 5;
+                    lockedText.text = "";
+                }
+
+                selectedLevel.text = "Dawn";
+                selectedLevel.color = new Color(0.7f, 0.2f, 0.2f);
+
+                medalAmountText.text = "x3";
+
+                level = LEVEL.DAWN;
+
+                break;
+            case LEVEL.GHOSTS:
+
+                lockedText.text = "Locked";
+
+                if (TrophyCount.trophyCount >= medalsForMountains)
+                {
+                    levelIndex = 6;
+                    lockedText.text = "";
+                }
+
+                selectedLevel.text = "Mountains";
+                selectedLevel.color = Color.cyan;
+
+                medalAmountText.text = "x5";
+
+                level = LEVEL.MOUNTAINS;
+
                 break;
         }
 
@@ -68,20 +160,104 @@ public class LevelSelect : MonoBehaviour {
         switch (level)
         {
             case LEVEL.SUNNY:
+
                 levelIndex = 2;
 
                 selectedLevel.text = "Misty";
                 selectedLevel.color = Color.grey;
 
+                lockedText.text = "";
+
+                medalAmountText.text = "x0";
+
                 level = LEVEL.MISTY;
+
                 break;
             case LEVEL.MISTY:
+
                 levelIndex = 3;
 
                 selectedLevel.text = "Space";
                 selectedLevel.color = Color.magenta;
 
+                lockedText.text = "";
+
+                medalAmountText.text = "x0";
+
                 level = LEVEL.SPACE;
+
+                break;
+            case LEVEL.SPACE:
+
+                selectedLevel.text = "Desert";
+                selectedLevel.color = new Color(1.0f, 0.85f, 0.7f);
+
+                lockedText.text = "Locked";
+
+                if (TrophyCount.trophyCount >= medalsForDesert)
+                {
+                    levelIndex = 4;
+                    lockedText.text = "";
+                }
+
+                medalAmountText.text = "x1";
+
+                level = LEVEL.DESERT;
+
+                break;
+            case LEVEL.DESERT:
+
+                selectedLevel.text = "Dawn";
+                selectedLevel.color = new Color(0.7f, 0.2f, 0.2f);
+
+                lockedText.text = "Locked";
+
+                if (TrophyCount.trophyCount >= medalsForDawn)
+                {
+                    levelIndex = 5;
+                    lockedText.text = "";
+                }
+
+                medalAmountText.text = "x3";
+
+                level = LEVEL.DAWN;
+
+                break;
+            case LEVEL.DAWN:
+
+                selectedLevel.text = "Mountains";
+                selectedLevel.color = Color.cyan;
+
+                lockedText.text = "Locked";
+
+                if (TrophyCount.trophyCount >= medalsForMountains)
+                {
+                    levelIndex = 6;
+                    lockedText.text = "";
+                }
+
+                medalAmountText.text = "x5";
+
+                level = LEVEL.MOUNTAINS;
+
+                break;
+            case LEVEL.MOUNTAINS:
+
+                selectedLevel.text = "Ghosts";
+                selectedLevel.color = Color.white;
+
+                lockedText.text = "Locked";
+
+                if (TrophyCount.trophyCount >= medalsForGhosts)
+                {
+                    levelIndex = 7;
+                    lockedText.text = "";
+                }
+
+                medalAmountText.text = "x9";
+
+                level = LEVEL.GHOSTS;
+
                 break;
         }
 

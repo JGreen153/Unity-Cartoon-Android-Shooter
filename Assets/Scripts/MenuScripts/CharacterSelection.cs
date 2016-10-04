@@ -14,6 +14,9 @@ public class CharacterSelection : MonoBehaviour {
     private SHIP ship = SHIP.FIRST;
 
     [SerializeField]
+    private float medalsForSmileShip, medalsForFishShip;
+
+    [SerializeField]
     private Sprite firstShip, secondShip, thirdShip;
 
     [SerializeField]
@@ -22,6 +25,9 @@ public class CharacterSelection : MonoBehaviour {
     [SerializeField]
     private Text lockedText;
 
+    [SerializeField]
+    private Text medalAmountText;
+
     public static int characterSelected; 
 
     void Start()
@@ -29,6 +35,7 @@ public class CharacterSelection : MonoBehaviour {
         characterSelected = 0;
 
         lockedText.text = "";
+        medalAmountText.text = "x0";
     }
 
     public void ChangeToLeftCharacter()
@@ -40,6 +47,7 @@ public class CharacterSelection : MonoBehaviour {
             case SHIP.SECOND:
 
                 lockedText.text = "";
+                medalAmountText.text = "x0";
 
                 characterSelected = 0;
 
@@ -51,8 +59,9 @@ public class CharacterSelection : MonoBehaviour {
             case SHIP.THIRD:
 
                 lockedText.text = "Locked";
+                medalAmountText.text = "x" + medalsForSmileShip;
 
-                if (TrophyCount.trophyCount > 2)
+                if (TrophyCount.trophyCount >= medalsForSmileShip)
                 {
                     characterSelected = 1;
                     lockedText.text = "";
@@ -75,8 +84,9 @@ public class CharacterSelection : MonoBehaviour {
             case SHIP.FIRST:
 
                 lockedText.text = "Locked";
+                medalAmountText.text = "x" + medalsForSmileShip;
 
-                if (TrophyCount.trophyCount > 2)
+                if (TrophyCount.trophyCount >= medalsForSmileShip)
                 {
                     characterSelected = 1;
                     lockedText.text = "";
@@ -89,8 +99,9 @@ public class CharacterSelection : MonoBehaviour {
             case SHIP.SECOND:
 
                 lockedText.text = "Locked";
+                medalAmountText.text = "x" + medalsForFishShip;
 
-                if (TrophyCount.trophyCount > 5)
+                if (TrophyCount.trophyCount >= medalsForFishShip)
                 {
                     characterSelected = 2;
                     lockedText.text = "";

@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class LevelLoad : MonoBehaviour {
 
@@ -12,6 +13,11 @@ public class LevelLoad : MonoBehaviour {
     [SerializeField]
     private Text loadingText;
 
+    private AudioSource backgroundMusic;
+
+    [SerializeField]
+    private AudioClip[] songs;
+
     void Awake()
     {
         if (instance == null)
@@ -20,33 +26,45 @@ public class LevelLoad : MonoBehaviour {
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+
+        backgroundMusic = GetComponent<AudioSource>();
     }
 
     // Use this for initialization
-	void Start() 
+    void Start() 
 	{
         loadingScreen.gameObject.SetActive(false);
 	}
+
+    void OnEnable()
+    {
+        SceneManager.activeSceneChanged += ChangeSongs;
+    }
 
     public void LoadMethod(int level)
     {
         StartCoroutine("Load", level);
     }
 
+    void OnDisable()
+    {
+        SceneManager.activeSceneChanged -= ChangeSongs;
+    }
+
     IEnumerator Load(int level)
     {
         yield return StartCoroutine("FadeInLoadingScreen");
 
-        //yield return StartCoroutine("FadeOut");
+        yield return StartCoroutine("FadeOut");
 
         yield return SceneManager.LoadSceneAsync(level);
 
         yield return StartCoroutine("FadeOutLoadingScreen");
 
-        //yield return StartCoroutine("FadeIn");
+        yield return StartCoroutine("FadeIn");
     }
 
-    /*
+    
     IEnumerator FadeOut()
     {
         float t = 0.0f;
@@ -81,7 +99,6 @@ public class LevelLoad : MonoBehaviour {
         if (backgroundMusic.volume > 0.95f)
             backgroundMusic.volume = 1.0f;
     }
-    */
 
     IEnumerator FadeInLoadingScreen()
     {
@@ -126,4 +143,21 @@ public class LevelLoad : MonoBehaviour {
 
         loadingScreen.gameObject.SetActive(false);
     }
+
+    void ChangeSongs(Scene prev, Scene next)
+    {
+        for(int i = 0; i < songs.Length; i++)
+        {
+            if(next.buildIndex == i)
+            {
+                backgroundMusic.clip = songs[i];
+
+                if (!backgroundMusic.isPlaying && backgroundMusic.clip.loadState == AudioDataLoadState.Loaded)
+                    backgroundMusic.Play();
+
+                break;
+            }
+        }
+    }
+
 }
