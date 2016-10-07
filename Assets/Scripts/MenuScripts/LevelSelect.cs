@@ -106,7 +106,7 @@ public class LevelSelect : MonoBehaviour {
                 selectedLevel.text = "Desert";
                 selectedLevel.color = new Color(1.0f, 0.85f, 0.7f);
 
-                medalAmountText.text = "x1";
+                medalAmountText.text = "x" + medalsForDesert;
 
                 level = LEVEL.DESERT;
 
@@ -124,7 +124,7 @@ public class LevelSelect : MonoBehaviour {
                 selectedLevel.text = "Dawn";
                 selectedLevel.color = new Color(0.7f, 0.2f, 0.2f);
 
-                medalAmountText.text = "x3";
+                medalAmountText.text = "x" + medalsForDawn;
 
                 level = LEVEL.DAWN;
 
@@ -142,7 +142,7 @@ public class LevelSelect : MonoBehaviour {
                 selectedLevel.text = "Mountains";
                 selectedLevel.color = Color.cyan;
 
-                medalAmountText.text = "x5";
+                medalAmountText.text = "x" + medalsForMountains;
 
                 level = LEVEL.MOUNTAINS;
 
@@ -200,7 +200,7 @@ public class LevelSelect : MonoBehaviour {
                     lockedText.text = "";
                 }
 
-                medalAmountText.text = "x1";
+                medalAmountText.text = "x" + medalsForDesert;
 
                 level = LEVEL.DESERT;
 
@@ -218,7 +218,7 @@ public class LevelSelect : MonoBehaviour {
                     lockedText.text = "";
                 }
 
-                medalAmountText.text = "x3";
+                medalAmountText.text = "x" + medalsForDawn;
 
                 level = LEVEL.DAWN;
 
@@ -236,7 +236,7 @@ public class LevelSelect : MonoBehaviour {
                     lockedText.text = "";
                 }
 
-                medalAmountText.text = "x5";
+                medalAmountText.text = "x" + medalsForMountains;
 
                 level = LEVEL.MOUNTAINS;
 
@@ -254,7 +254,7 @@ public class LevelSelect : MonoBehaviour {
                     lockedText.text = "";
                 }
 
-                medalAmountText.text = "x9";
+                medalAmountText.text = "x" + medalsForGhosts;
 
                 level = LEVEL.GHOSTS;
 

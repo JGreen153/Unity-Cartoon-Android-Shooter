@@ -222,7 +222,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 5be6df8c24ac96043bf08c1c0bb3e241, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d8e67e6394cd6a54ba8d86dba3038167, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -244,7 +244,7 @@ MonoBehaviour:
   loadingScreen: {fileID: 114000010271677182}
   loadingText: {fileID: 114000010254460462}
   songs:
-  - {fileID: 8300000, guid: e0f90b6ad336c244cb439c1ca3c93e7d, type: 3}
+  - {fileID: 8300000, guid: 4020916288faf054ba00af0e58342956, type: 3}
   - {fileID: 8300000, guid: 66a7e487ef9fa5545af9ee7f86d638be, type: 3}
   - {fileID: 8300000, guid: 0bfa3aa7c2512444fb4f1234be03045a, type: 3}
   - {fileID: 8300000, guid: 2ad89482dab57cd45bd39ccd1c2eccff, type: 3}

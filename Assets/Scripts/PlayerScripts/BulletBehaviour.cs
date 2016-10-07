@@ -56,7 +56,16 @@ public class BulletBehaviour : MonoBehaviour
         explosion.transform.rotation = transform.rotation;
         explosion.SetActive(true);
 
-        Invoke("Disable", 0.35f);
+        Invoke("Disable", 0.5f);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.GetComponent<IPowerup>() != null)
+        {
+            other.GetComponent<IPowerup>().ApplyPowerup();
+            other.GetComponent<IPowerup>().DestroyPowerup();
+        }
     }
 
     void Disable()

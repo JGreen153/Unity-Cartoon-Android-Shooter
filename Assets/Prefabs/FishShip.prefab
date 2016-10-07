@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd9ae93f7c3d6f94c8de817c27867c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 5
   boundary:
     xMin: -10.5
     xMax: 10.5
@@ -196,7 +196,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1000013804584550, guid: 5511140f3bd1c3a41b6607bde8dc558a,
     type: 2}
   bulletPosition: {fileID: 4000012247671714}
-  pooledAmount: 15
+  pooledAmount: 50
   fireRate: 0
   singleShot: 1
 --- !u!114 &114000014001446322

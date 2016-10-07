@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd9ae93f7c3d6f94c8de817c27867c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 5
   boundary:
     xMin: -10.5
     xMax: 10.5

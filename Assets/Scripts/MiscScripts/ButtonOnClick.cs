@@ -7,6 +7,9 @@ public class ButtonOnClick : MonoBehaviour {
     [SerializeField]
     private int level;
 
+    [SerializeField]
+    private int medalsRequiredForStage;
+
     private LevelLoad levelLoader;
     private Button button;
 
@@ -15,6 +18,10 @@ public class ButtonOnClick : MonoBehaviour {
     {
         levelLoader = FindObjectOfType<LevelLoad>();
         button = GetComponent<Button>();
-        button.onClick.AddListener(() => levelLoader.LoadMethod(level));
+
+        if (TrophyCount.trophyCount >= medalsRequiredForStage)
+            button.onClick.AddListener(() => levelLoader.LoadMethod(level));
+        else
+            button.onClick.AddListener(() => levelLoader.LoadMethod(0));
     }
 }

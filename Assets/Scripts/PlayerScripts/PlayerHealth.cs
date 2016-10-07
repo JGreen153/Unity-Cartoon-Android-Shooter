@@ -29,7 +29,7 @@ public class PlayerHealth : Health {
 
     public void Heal()
     {
-        if (GetHealth <= 80)
+        if (health <= 80)
             health += 20;
         else
             health = 100;
@@ -39,7 +39,12 @@ public class PlayerHealth : Health {
     {
         if(other.gameObject.GetComponent<Enemy>() != null)
         {
-            Damage(other.gameObject.GetComponent<Enemy>().Damage);
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+
+            if (health - enemy.Damage >= 0)
+                Damage(enemy.Damage);
+            else
+                health = 0;
 
             if (OnHealthUpdated != null)
                 OnHealthUpdated();

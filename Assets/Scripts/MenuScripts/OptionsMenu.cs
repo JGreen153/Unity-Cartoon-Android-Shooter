@@ -5,23 +5,22 @@ using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour {
 
+    public delegate void UpdateTrophyText();
+    public static event UpdateTrophyText OnUpdateTrophyText;
+
+    private static bool musicToggleStatus = true;
+    private static bool sfxToggleStatus = true;  
+
     [SerializeField]
     private AudioMixer musicMixer, sfxMixer;
 
     [SerializeField]
     private Toggle musicToggle, sfxToggle;
 
-    private float startMusicVolume;
-    private float startSfxVolume;
-
-    // Use this for initialization
-    void Start() 
-	{
-        bool v = true;
-        bool s = true;
-
-        v = musicMixer.GetFloat("Volume", out startMusicVolume);
-        s = sfxMixer.GetFloat("Volume", out startSfxVolume);
+    void Start()
+    {
+        musicToggle.isOn = musicToggleStatus;
+        sfxToggle.isOn = sfxToggleStatus;
     }
 
     public void ToggleMusicVolume()
@@ -32,8 +31,11 @@ public class OptionsMenu : MonoBehaviour {
         }
         else
         {
-            musicMixer.SetFloat("Volume", startMusicVolume);
+            musicMixer.SetFloat("Volume", 0.0f);
         }
+
+        musicToggleStatus = musicToggle.isOn;
+
     }
 
     public void ToggleSFXVolume()
@@ -44,7 +46,23 @@ public class OptionsMenu : MonoBehaviour {
         }
         else
         {
-            sfxMixer.SetFloat("Volume", startSfxVolume);
+            sfxMixer.SetFloat("Volume", 0.0f);
         }
+
+        sfxToggleStatus = sfxToggle.isOn;
+
     }
+
+    public void Clear()
+    {
+        PlayerPrefs.SetInt("trophyCount", 0);
+
+        TrophyCount.trophyCount = PlayerPrefs.GetInt("trophyCount");
+
+        PlayerPrefs.Save();
+
+        if (OnUpdateTrophyText != null)
+            OnUpdateTrophyText();
+    }
+
 }

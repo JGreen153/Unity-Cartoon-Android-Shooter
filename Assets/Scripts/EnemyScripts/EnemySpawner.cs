@@ -13,7 +13,9 @@ public class EnemySpawner : MonoBehaviour {
     [SerializeField]
     private float spawnDelay = 3;
 
+    [SerializeField]
     private int pooledAmount = 10;
+
     private List<GameObject> enemies;
 
     // Use this for initialization

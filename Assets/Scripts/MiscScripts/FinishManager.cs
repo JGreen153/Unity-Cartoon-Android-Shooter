@@ -12,6 +12,8 @@ public class FinishManager : MonoBehaviour {
 
     public static int ScoreToWin;
 
+    private AudioSource winMusic;
+
     [SerializeField]
     private float platinumTime, goldTime, silverTime;
 
@@ -20,6 +22,9 @@ public class FinishManager : MonoBehaviour {
 
     [SerializeField]
     private Image gameWinMedal, perfectWinMedal;
+
+    [SerializeField]
+    private AudioClip[] winMusicSongs; 
 
     [SerializeField]
     private Sprite[] medals;
@@ -36,6 +41,8 @@ public class FinishManager : MonoBehaviour {
         hasBeenHit = false;
 
         gameIsRunning = true;
+
+        winMusic = GetComponent<AudioSource>();
 
         GameObject p = GameObject.FindGameObjectWithTag("Player");
 
@@ -71,9 +78,14 @@ public class FinishManager : MonoBehaviour {
 
     void AnimateGameOverScreen()
     {
+        winMusic.clip = winMusicSongs[0];
+        winMusic.Play();
+
         gameOverAnimator.Play("GameOverFadeIn");
 
         Time.timeScale = 0.5f;
+
+        gameIsRunning = false;
     }
 
     void CheckConditions()
@@ -82,6 +94,9 @@ public class FinishManager : MonoBehaviour {
         {
             if (OnGameFinished != null)
                 OnGameFinished();
+
+            winMusic.clip = winMusicSongs[1];
+            winMusic.Play();
 
             youWinAnimator.Play("GameWinFadeIn");
 
@@ -113,6 +128,9 @@ public class FinishManager : MonoBehaviour {
             if (OnGameFinished != null)
                 OnGameFinished();
 
+            winMusic.clip = winMusicSongs[2];
+            winMusic.Play();
+
             perfectWinAnimator.Play("PerfectFadeIn");
 
             player.GetComponent<Collider2D>().isTrigger = true;
@@ -125,7 +143,11 @@ public class FinishManager : MonoBehaviour {
             if (TimeSurvived.time <= platinumTime)
             {
                 perfectWinMedal.sprite = medals[3];
+
                 TrophyCount.trophyCount++;
+
+                PlayerPrefs.SetInt("trophyCount", TrophyCount.trophyCount);
+                PlayerPrefs.Save();
             }
             else if (TimeSurvived.time > platinumTime && TimeSurvived.time <= goldTime)
             {

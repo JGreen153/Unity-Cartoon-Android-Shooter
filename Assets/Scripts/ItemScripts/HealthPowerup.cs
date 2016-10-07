@@ -8,9 +8,13 @@ public class HealthPowerup : MonoBehaviour, IPowerup {
 
     private PlayerHealth player;
 
+    private AudioSource powerUpSound;
+
     // Use this for initialization
 	void Start() 
 	{
+        powerUpSound = GetComponent<AudioSource>();
+
         GameObject p = GameObject.FindGameObjectWithTag("Player");
 
         if (p != null)
@@ -29,13 +33,25 @@ public class HealthPowerup : MonoBehaviour, IPowerup {
     {
         player.Heal();
 
+        powerUpSound.Play();
+
         if (OnHealthUpdated != null)
             OnHealthUpdated();
     }
 
     public void DestroyPowerup()
     {
+        Invoke("Disable", 0.15f);
+    }
+
+    void Disable()
+    {
         gameObject.SetActive(false);
         transform.position = Vector2.zero;
+    }
+
+    void OnDisable()
+    {
+        CancelInvoke();
     }
 }

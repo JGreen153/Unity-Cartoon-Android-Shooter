@@ -7,35 +7,41 @@ public class UFOEnemy : Enemy {
 
     private bool facingLeft;
 
+    void Awake()
+    {
+        Transform p = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if (p != null)
+            player = p;
+    }
+
     // Use this for initialization
 	void Start() 
 	{
         rb = GetComponent<Rigidbody2D>();
-
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        speed = Random.Range(speed - 1, speed + 1);
 
         facingLeft = true;
 	}
 
     void OnEnable()
     {
-        facingLeft = true;
+        if (!facingLeft)
+            Flip();
     }
 
     public override void Move()
     {
-        Vector3 target = (player.position - transform.position).normalized;
-        rb.velocity = new Vector2(target.x, target.y) * speed;
+        if (player != null)
+        {
+            Vector3 target = (player.position - transform.position).normalized;
 
-        if(target.x > 0 && facingLeft)
-        {
-            Flip();
-        }
-        else if(target.x < 0 && !facingLeft)
-        {
-            Flip();
+            rb.velocity = new Vector2(-1 * speed, target.y);
+
+            if (target.x < 0 && facingLeft)
+                Flip();
+            else if (target.x > 0 && !facingLeft)
+                Flip();
+            
         }
     }
 

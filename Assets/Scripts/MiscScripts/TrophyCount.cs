@@ -9,9 +9,29 @@ public class TrophyCount : MonoBehaviour {
     [SerializeField]
     private Text trophyCountText;
 
+    void Awake()
+    {
+        trophyCount = PlayerPrefs.GetInt("trophyCount");
+    }
+
     void Start()
     {
         trophyCountText.text = "x" + trophyCount;
+    }
+
+    void OnEnable()
+    {
+        OptionsMenu.OnUpdateTrophyText += UpdateText;
+    }
+
+    void UpdateText()
+    {
+        trophyCountText.text = "x" + trophyCount;
+    }
+
+    void OnDisable()
+    {
+        OptionsMenu.OnUpdateTrophyText -= UpdateText;
     }
 
 }

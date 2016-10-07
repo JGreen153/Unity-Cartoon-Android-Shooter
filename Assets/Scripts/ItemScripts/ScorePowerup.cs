@@ -9,6 +9,13 @@ public class ScorePowerup : MonoBehaviour, IPowerup {
     [SerializeField]
     private int scoreIncrease;
 
+    private AudioSource powerUpSound;
+
+    void Start()
+    {
+        powerUpSound = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         if (transform.position.y < -4.8f)
@@ -24,14 +31,26 @@ public class ScorePowerup : MonoBehaviour, IPowerup {
         else if (PlayerScore.score + scoreIncrease >= FinishManager.ScoreToWin)
             PlayerScore.score = FinishManager.ScoreToWin;
 
+        powerUpSound.Play();
+
         if (OnUpdateScore != null)
             OnUpdateScore();
     }
 
     public void DestroyPowerup()
     {
+        Invoke("Disable", 0.15f);
+    }
+
+    void Disable()
+    {
         gameObject.SetActive(false);
         transform.position = Vector2.zero;
+    }
+
+    void OnDisable()
+    {
+        CancelInvoke();
     }
 
 }

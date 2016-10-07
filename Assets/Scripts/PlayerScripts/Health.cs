@@ -64,7 +64,7 @@ public abstract class Health : MonoBehaviour {
         explosion.SetActive(true);
         gameObject.SetActive(false);
 
-        Invoke("Disable", 0.4f);
+        Invoke("Disable", 0.5f);
     }
 
     public void Disable()

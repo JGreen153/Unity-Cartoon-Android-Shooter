@@ -14,6 +14,8 @@ public class PlayerShoot : MonoBehaviour {
     private float fireRate;
     [SerializeField]
     private bool singleShot;
+    
+    public bool SingleShot { get { return singleShot; } }  
 
     private float nextFire;
 
@@ -47,26 +49,48 @@ public class PlayerShoot : MonoBehaviour {
         }
 	}
 
-    // Update is called once per frame
-    void Update()
+    public void Fire()
     {
-        if (Input.GetButtonDown("Jump") && Time.time > nextFire && singleShot)
+        if (gameObject.activeSelf)
         {
-            nextFire = Time.time + fireRate;
-            Fire();
-        }
-        else if (Input.GetButtonDown("Jump") && Time.time > nextFire && !singleShot)
-        {
-            nextFire = Time.time + fireRate;
-            BurstFire();
-            Invoke("BurstFire", burstTime);
-            Invoke("BurstFire", burstTime * 2);
+            if (Time.time > nextFire)
+            {
 
-        }
+                nextFire = Time.time + fireRate;
 
+                for (int i = 0; i < bullets.Count; i++)
+                {
+                    if (!bullets[i].activeInHierarchy)
+                    {
+                        bullets[i].transform.position = bulletPosition.position;
+                        bullets[i].transform.rotation = transform.rotation;
+                        Physics2D.IgnoreCollision(bulletCol, col);
+                        bulletRb.velocity = rb.velocity;
+                        bullets[i].SetActive(true);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
-    void Fire()
+    public void BurstFire()
+    {
+        if (gameObject.activeSelf)
+        {
+            if (Time.time > nextFire)
+            {
+
+                nextFire = Time.time + fireRate;
+
+                Burst();
+                Invoke("Burst", burstTime);
+                Invoke("Burst", burstTime * 2);
+            }
+        }
+    }
+
+    void Burst()
     {
         for (int i = 0; i < bullets.Count; i++)
         {
@@ -82,20 +106,9 @@ public class PlayerShoot : MonoBehaviour {
         }
     }
 
-    void BurstFire()
+    void OnDisable()
     {
-        for(int i = 0; i < bullets.Count; i++)
-        {
-            if (!bullets[i].activeInHierarchy)
-            {
-                bullets[i].transform.position = bulletPosition.position;
-                bullets[i].transform.rotation = transform.rotation;
-                Physics2D.IgnoreCollision(bulletCol, col);
-                bulletRb.velocity = rb.velocity;
-                bullets[i].SetActive(true);
-                break;
-            }
-        }
+        CancelInvoke();
     }
 
 }

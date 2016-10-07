@@ -39,11 +39,17 @@ public class ItemSpawner : MonoBehaviour {
 
             if (!item.activeInHierarchy)
             {
-                item.transform.position = new Vector3(Random.Range(-10, 10), 5.4f);
+                item.transform.position = new Vector3(Random.Range(-5, 10), 5.4f);
                 item.transform.rotation = Quaternion.identity;
                 item.SetActive(true);
                 break;
             }
         }
     }
+
+    void OnDisable()
+    {
+        CancelInvoke();
+    }
+
 }
