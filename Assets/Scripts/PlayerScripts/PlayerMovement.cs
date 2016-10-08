@@ -34,24 +34,30 @@ public class PlayerMovement : MonoBehaviour {
 
     public void MoveUp()
     {
-        if (IsInvoking("Stop"))
-            CancelInvoke();
+        if (Time.timeScale > 0.1f)
+        {
+            if (IsInvoking("Stop"))
+                CancelInvoke();
 
-        rb.velocity = new Vector2(rb.velocity.x, 0.0f);
-        rb.velocity += Vector2.up * speed;
+            rb.velocity = new Vector2(rb.velocity.x, 0.0f);
+            rb.velocity += Vector2.up * speed;
 
-        Invoke("Stop", 0.3f);
+            Invoke("Stop", 0.3f);
+        }
     }
 
     public void MoveDown()
     {
-        if (IsInvoking("Stop"))
-            CancelInvoke();
+        if (Time.timeScale > 0.1f)
+        {
+            if (IsInvoking("Stop"))
+                CancelInvoke();
 
-        rb.velocity = new Vector2(rb.velocity.x, 0.0f);
-        rb.velocity += Vector2.down * speed;
+            rb.velocity = new Vector2(rb.velocity.x, 0.0f);
+            rb.velocity += Vector2.down * speed;
 
-        Invoke("Stop", 0.3f);
+            Invoke("Stop", 0.3f);
+        }
     }
 
     public void Stop()

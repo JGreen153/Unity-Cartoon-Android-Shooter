@@ -445,9 +445,7 @@ Prefab:
     - target: {fileID: 114000010772849676, guid: d119a8e95e456764881ede55186d772c,
         type: 2}
       propertyPath: m_Text
-      value: 'TARGET SCORE = 4000
-
-'
+      value: TARGET SCORE = 4000
       objectReference: {fileID: 0}
     - target: {fileID: 114000010945173920, guid: d119a8e95e456764881ede55186d772c,
         type: 2}

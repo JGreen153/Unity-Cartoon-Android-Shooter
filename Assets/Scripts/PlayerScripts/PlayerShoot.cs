@@ -51,7 +51,7 @@ public class PlayerShoot : MonoBehaviour {
 
     public void Fire()
     {
-        if (gameObject.activeSelf)
+        if (gameObject.activeSelf && Time.timeScale > 0.1f)
         {
             if (Time.time > nextFire)
             {
@@ -76,7 +76,7 @@ public class PlayerShoot : MonoBehaviour {
 
     public void BurstFire()
     {
-        if (gameObject.activeSelf)
+        if (gameObject.activeSelf && Time.timeScale > 0.1f)
         {
             if (Time.time > nextFire)
             {

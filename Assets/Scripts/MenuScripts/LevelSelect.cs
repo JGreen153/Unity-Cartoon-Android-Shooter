@@ -20,25 +20,23 @@ public class LevelSelect : MonoBehaviour {
     private Text selectedLevel;
 
     [SerializeField]
-    private Button leftButton, rightButton;
-
-    [SerializeField]
     private Text medalAmountText, lockedText;
 
     [SerializeField]
     private float medalsForDesert, medalsForDawn, medalsForMountains, medalsForGhosts;
 
+    [SerializeField]
+    private Button button;
+
     private int levelIndex;
 
     private LevelLoad levelLoader;
-    private Button button;
 
     void Start()
     {
         levelIndex = 1;
 
         levelLoader = FindObjectOfType<LevelLoad>();
-        button = GetComponent<Button>();
 
         lockedText.text = "";
 
