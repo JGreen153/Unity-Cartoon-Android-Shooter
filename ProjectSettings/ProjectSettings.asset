@@ -10,7 +10,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: JZap Games
+  companyName: JZap
   productName: Awesome Aerial Assault
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -93,14 +93,14 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.JZapGames.AwesomeAerialAssault
-  bundleVersion: 1.3
+  bundleIdentifier: com.JZap.AwesomeAerialAssault
+  bundleVersion: 1.4
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
   xboxOneDisableKinectGpuReservation: 0
   singlePassStereoRendering: 0
   protectGraphicsMemory: 0
-  AndroidBundleVersionCode: 13
+  AndroidBundleVersionCode: 14
   AndroidMinSdkVersion: 9
   AndroidPreferredInstallLocation: 1
   aotOptions: 
@@ -165,7 +165,7 @@ PlayerSettings:
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: C:/Users/Jamel/Desktop/Unity/Android Project/user.keystore
-  AndroidKeyaliasName: awesome aerial assault
+  AndroidKeyaliasName: aaa
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1

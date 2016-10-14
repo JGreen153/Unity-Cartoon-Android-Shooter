@@ -5,7 +5,7 @@ using System.Collections;
 [System.Serializable]
 public class Boundary
 {
-    public float xMin, xMax, yMin, yMax;
+    public float yMin, yMax;
 }
 
 public class PlayerMovement : MonoBehaviour {
@@ -34,20 +34,25 @@ public class PlayerMovement : MonoBehaviour {
 
     public void MoveUp()
     {
+        //check if the game is paused
         if (Time.timeScale > 0.1f)
         {
+            //if the method Stop is being invoked then cancel it
             if (IsInvoking("Stop"))
                 CancelInvoke();
 
+            //sets the velocity on the y axis to zero and then adds some speed on the y axis
             rb.velocity = new Vector2(rb.velocity.x, 0.0f);
             rb.velocity += Vector2.up * speed;
 
+            //Invoke the stop method to ensure that the player doesn't carry on moving uncontrollably
             Invoke("Stop", 0.3f);
         }
     }
 
     public void MoveDown()
     {
+        //same as above except moves the player downwards
         if (Time.timeScale > 0.1f)
         {
             if (IsInvoking("Stop"))
@@ -67,6 +72,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        //if the player hits a powerup then apply the powerup and destroy the powerup shortly after
         if(other.GetComponent<IPowerup>() != null)
         {
             other.GetComponent<IPowerup>().ApplyPowerup();
@@ -76,6 +82,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnDisable()
     {
+        //cancel any methods being invoked when this object is disabled
         CancelInvoke();
     }
 

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class TimeUI : MonoBehaviour {
 
+    //text that displays the timer
     private Text text;
 
     // Use this for initialization
@@ -14,12 +15,13 @@ public class TimeUI : MonoBehaviour {
 
     void OnEnable()
     {
+        //call UpdateText whenever the event is called
         TimeSurvived.OnTimeUpdated += UpdateText;
     }
 
-	// Update is called once per frame
 	void UpdateText()
 	{
+        //update the timer ui
         text.text = "Time: " + TimeSurvived.time;
 	}
 

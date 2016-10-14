@@ -4,12 +4,15 @@ using UnityEngine.UI;
 
 public class ButtonOnClick : MonoBehaviour {
 
+    //the level that i want to load
     [SerializeField]
     private int level;
 
+    //amount of medals required to start the stage
     [SerializeField]
     private int medalsRequiredForStage;
 
+    //singleton that loads the levels
     private LevelLoad levelLoader;
     private Button button;
 
@@ -19,6 +22,8 @@ public class ButtonOnClick : MonoBehaviour {
         levelLoader = FindObjectOfType<LevelLoad>();
         button = GetComponent<Button>();
 
+        //if the player has the amount of medals required for the stage then load the scene specified by level (the int variable)
+        //if they don't have the required amount then send them back to the main menu
         if (TrophyCount.trophyCount >= medalsRequiredForStage)
             button.onClick.AddListener(() => levelLoader.LoadMethod(level));
         else
