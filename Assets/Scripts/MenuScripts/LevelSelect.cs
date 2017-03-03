@@ -37,22 +37,16 @@ public class LevelSelect : MonoBehaviour {
     //variable used to load levels according to their build index
     private int levelIndex;
 
-    //variable for the object that loads the levels/scenes
-    private LevelLoad levelLoader;
-
     void Start()
     {
         //initially level index is set to the first level
         levelIndex = 1;
 
-        //gets the Levelload object in the scene which is a singleton
-        levelLoader = FindObjectOfType<LevelLoad>();
-
         //text that indicates whether or not something is locked is set to nothing
         lockedText.text = "";
 
         //adds an action to the button that allows it to load the scene defined by levelIndex
-        button.onClick.AddListener(() => levelLoader.LoadMethod(levelIndex));
+        button.onClick.AddListener(() => LevelLoad.instance.LoadMethod(levelIndex));
     }
 
     //method for when the left button has been pressed
@@ -174,7 +168,7 @@ public class LevelSelect : MonoBehaviour {
         //removes any actions/listeners that are on the button
         button.onClick.RemoveAllListeners();
         //adds an action to the button that loads the scene defined by the levelIndex
-        button.onClick.AddListener(() => levelLoader.LoadMethod(levelIndex));
+        button.onClick.AddListener(() => LevelLoad.instance.LoadMethod(levelIndex));
     }
 
     //same as the method above, except it changes the level to the one on the right
@@ -287,7 +281,7 @@ public class LevelSelect : MonoBehaviour {
         }
 
         button.onClick.RemoveAllListeners();
-        button.onClick.AddListener(() => levelLoader.LoadMethod(levelIndex));
+        button.onClick.AddListener(() => LevelLoad.instance.LoadMethod(levelIndex));
     }
 
 }

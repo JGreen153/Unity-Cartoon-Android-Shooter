@@ -12,21 +12,18 @@ public class ButtonOnClick : MonoBehaviour {
     [SerializeField]
     private int medalsRequiredForStage;
 
-    //singleton that loads the levels
-    private LevelLoad levelLoader;
     private Button button;
 
     // Use this for initialization
     void Start()
     {
-        levelLoader = FindObjectOfType<LevelLoad>();
         button = GetComponent<Button>();
 
         //if the player has the amount of medals required for the stage then load the scene specified by level (the int variable)
         //if they don't have the required amount then send them back to the main menu
         if (TrophyCount.trophyCount >= medalsRequiredForStage)
-            button.onClick.AddListener(() => levelLoader.LoadMethod(level));
+            button.onClick.AddListener(() => LevelLoad.instance.LoadMethod(level));
         else
-            button.onClick.AddListener(() => levelLoader.LoadMethod(0));
+            button.onClick.AddListener(() => LevelLoad.instance.LoadMethod(0));
     }
 }
